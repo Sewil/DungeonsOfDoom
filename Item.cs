@@ -3,29 +3,88 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DungeonsOfDoom
 {
-    class Item
+    /// <remarks/>
+    [SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class Items
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public int Weight { get; private set; }
 
-        public Item(string name, string description, int weight)
+        private Item[] itemField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Item")]
+        public Item[] Item
         {
-            Name = name;
-            Description = description;
-            Weight = weight;
+            get
+            {
+                return this.itemField;
+            }
+            set
+            {
+                this.itemField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.SerializableAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class Item
+    {
+
+        private string nameField;
+
+        private string descriptionField;
+
+        private ushort valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
         }
 
-        public static Item[] GetItems(string[] text) {
-            Item[] items = new Item[text.Length];
-            for (int i = 0; i < text.Length; i++) //lägger in allt från filen till en Items array
-            {//"Magical Sword" "A very heavy sword that is magical and glows blue" 24
-                items[i] = new Item(text[i].Split('"')[1], text[i].Split('"')[3], int.Parse(text[i].Split('"')[4]));
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Description
+        {
+            get
+            {
+                return this.descriptionField;
             }
-            return items;
+            set
+            {
+                this.descriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ushort Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
         }
     }
 }

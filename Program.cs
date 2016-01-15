@@ -51,7 +51,6 @@ namespace DungeonsOfDoom {
                         IO.PadLines(2);
                     }
                 }
-                player.WriteWeightStatus();
 
                 key = Console.ReadKey().Key;
 

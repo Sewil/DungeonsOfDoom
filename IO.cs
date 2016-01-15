@@ -20,10 +20,6 @@ namespace DungeonsOfDoom {
             soundPlayer.SoundLocation = "Pick up item.wav";
             soundPlayer.Play();
         }
-        public static void PlayTooMuchWeight() {
-            soundPlayer.SoundLocation = "Too much weight.wav";
-            soundPlayer.Play();
-        }
         static void WriteLogo() {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
@@ -48,14 +44,14 @@ namespace DungeonsOfDoom {
                 Console.Write("Character name: ");
                 userName = Console.ReadLine();
 
-            } while (!Player.ValidName(userName));
+            } while (!Character.ValidName(userName));
 
             return userName;
         }
         public static string AskForClass() {
             ConsoleKey choosenClass;
             do {
-                IO.CleanConsole();
+                CleanConsole();
                 Console.WriteLine("Choose your class: (W)arrior, (R)ogue or (S)orcerer?");
                 choosenClass = Console.ReadKey().Key;
 
@@ -64,7 +60,7 @@ namespace DungeonsOfDoom {
             return choosenClass.ToString();
         }
         public static void WriteAttributes(Player player) {
-            IO.CleanConsole();
+            CleanConsole();
             Console.WriteLine("ATTRIBUTES");
             Console.WriteLine("Strength: " + player.Strength + "%");
             Console.WriteLine("Dexterity: " + player.Dexterity + "%");
@@ -87,17 +83,8 @@ namespace DungeonsOfDoom {
             return key == ConsoleKey.D;
         }
         public static void WriteFoundItem(this Item item) {
-            Console.WriteLine("You found " + item.Name + " (" + (double.Parse(item.Weight.ToString()) / 1000) + "kg)! Press P to pick it up.");
-            Console.WriteLine("\"" + item.Description + "\"");
-        }
-        public static void WriteTooMuchWeight() {
-            Console.WriteLine("This item weighs too much!");
-        }
-        public static void WriteWeightStatus(this Player player) {
-            Console.WriteLine("Carrying "
-                + (double.Parse(player.CurrentWeight.ToString()) / 1000)
-                + "/"
-                + (double.Parse(Player.MaxWeight.ToString()) / 1000) + "kg");
+            Console.WriteLine($"You found {item.Name})! Press P to pick it up.");
+            Console.WriteLine($"\"{item.Description}\"");
         }
         public static void PadLines(int lines) {
             for (int i = 0; i < lines; i++) {
@@ -117,6 +104,5 @@ namespace DungeonsOfDoom {
             Console.Write(text);
             Console.ReadKey();
         }
-
     }
 }

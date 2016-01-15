@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Items>
+  <Item Name="Magical Sword" Description="A very heavy sword that is magical and glows blue." Value="10000" />
+  <Item Name="Heavy Armour" Description="This armour is so heavy you'll wonder why you ever put it on" Value="22000" />
+  <Item Name="Blue Potion" Description="A blue potion that restores your health" Value="1500" />
+  <Item Name="Brown Cap" Description="A cap that smells funny" Value="600" />
+  <Item Name="Thunder Staff" Description="A shockingly light staff" Value="6000" />
+</Items>

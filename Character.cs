@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DungeonsOfDoom {
-    class Character {
-        public static char Icon { get { return '☻'; } }
-        public static int MaxWeight { get { return 50000; } }
-        public int CurrentWeight { get; set; }
-        public List<Item> Inventory { get; set; }
-        string name;
+    abstract class Character {
 
+        public List<Item> Inventory { get; set; }
+
+        string name;
         public string Name {
             get { return name; }
             set {
@@ -27,6 +25,12 @@ namespace DungeonsOfDoom {
         public int Intelligence { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+        public Character()
+        {
+            Inventory = new List<Item>();
+        }
+
         public static bool ValidName(string value) {
             return value.Length >= 2 && value.Length <= 12;
         }
@@ -61,18 +65,10 @@ namespace DungeonsOfDoom {
         }
         public void Loot(Cell cell) {
             if (cell.HasItem) {
-                int weightAfterPickup = CurrentWeight + cell.Item.Weight;
-                if (weightAfterPickup <= MaxWeight) { //plockar upp
-                    IO.PlayPickUpItem();
-                    Inventory.Add(cell.Item);
-                    CurrentWeight += cell.Item.Weight;
-                    cell.HasItem = false;
-                    IO.PadLines(2);
-                } else if (weightAfterPickup > MaxWeight) {// rummet har ett item men spelaren orkar inte bära det
-                    IO.PlayTooMuchWeight();
-                    IO.WriteTooMuchWeight();
-                    IO.PadLines(1);
-                }
+                IO.PlayPickUpItem();
+                Inventory.Add(cell.Item);
+                cell.HasItem = false;
+                IO.PadLines(2);
             } else {
                 IO.PadLines(2);
             }

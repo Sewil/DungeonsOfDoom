@@ -13,8 +13,7 @@ namespace DungeonsOfDoom {
             Icon = icon;
         }
         public bool IsRoom() {
-            return Icon == ' ' || Icon == Player.Icon;
+            return Icon == DungeonsOfDoom.Icon.ROOM || Icon == DungeonsOfDoom.Icon.PLAYER;
         }
-        
     }
 }
