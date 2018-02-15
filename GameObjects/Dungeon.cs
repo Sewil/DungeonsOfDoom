@@ -1,12 +1,9 @@
-﻿using System;
+﻿using DungeonsOfDoom.Enums;
+using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DungeonsOfDoom
+namespace DungeonsOfDoom.GameObjects
 {
     class Dungeon
     {
@@ -27,25 +24,28 @@ namespace DungeonsOfDoom
             }
             Cells = new Cell[longestRow, chart.Length];
 
-            char icon;
+            CellIcon icon = CellIcon.None;
             for (int x = 0; x < Cells.GetLength(0); x++)
             {
                 for (int y = 0; y < Cells.GetLength(1); y++)
                 {
                     try
                     {
-                        icon = chart[y][x];
+                        icon = (CellIcon)chart[y][x];
                     }
                     catch
                     {
-                        icon = '\0';
+                        icon = CellIcon.Unwalkable;
                     }
-                    Cells[x, y] = new Cell(icon);
 
-                    if (Cells[x, y].Icon == Icon.PLAYER)
+                    if (icon == CellIcon.Player)
                     {
-                        Cells[x, y].Icon = Icon.ROOM;
+                        Cells[x, y] = new Cell(CellIcon.Room);
                         SpawnPoint = new int[] { x, y };
+                    }
+                    else
+                    {
+                        Cells[x, y] = new Cell(icon);
                     }
                 }
             }
@@ -78,30 +78,10 @@ namespace DungeonsOfDoom
                 for (int y = 0; y < Cells.GetLength(1); y++)
                 {
                     if (random.Next(1, 101) <= 10 && itemsLeft > 0 && Cells[x, y].IsRoom())
-                    { // delar ut denna Item array till kartan, 10% chans att ett rum får ett item
-                        Cells[x, y].HasItem = true;
+                    {
                         Cells[x, y].Item = items[items.Length - (itemsLeft--)];
                     }
                 }
-            }
-        }
-
-        public void Print(Player player)
-        {
-            for (int y = 0; y < Cells.GetLength(1); y++)
-            {
-                for (int x = 0; x < Cells.GetLength(0); x++)
-                {
-                    if (Cells[x, y].Icon == Icon.ROOM && x == player.X && y == player.Y)
-                    {
-                        Console.Write(Icon.PLAYER);
-                    }
-                    else {
-                        Console.Write(Cells[x, y].Icon);
-                    }
-                }
-
-                Console.WriteLine();
             }
         }
     }

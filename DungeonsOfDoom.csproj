@@ -41,14 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Character.cs" />
-    <Compile Include="Dungeon.cs" />
-    <Compile Include="Icon.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="Enums\CellIcon.cs" />
+    <Compile Include="GameObjects\Character.cs" />
+    <Compile Include="GameObjects\Dungeon.cs" />
+    <Compile Include="Enums\ControlKey.cs" />
+    <Compile Include="Enums\GameWindow.cs" />
+    <Compile Include="Enums\ItemType.cs" />
+    <Compile Include="Enums\MonsterType.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameObjects\Monster.cs" />
+    <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Item.cs" />
+    <Compile Include="Services\KeyboardListener.cs" />
+    <Compile Include="Utils\Maths.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs" />
+    <Compile Include="GameObjects\Cell.cs" />
+    <Compile Include="Services\ConsoleService.cs" />
+    <Compile Include="Services\SoundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
